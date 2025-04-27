@@ -20,7 +20,7 @@ jobs:
 
       # Cache Docker layers
       - name: Cache Docker layers
-        uses: actions/cache@v3  # Updated to v3
+        uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ hashFiles('**/Dockerfile') }}
@@ -31,6 +31,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t my-node-app .
+          docker images  # List Docker images to verify the build
 
       # Log in to Docker Hub (use your Docker Hub username and access token)
       - name: Log in to Docker Hub
@@ -44,6 +45,7 @@ jobs:
         run: |
           docker tag my-node-app ${{ secrets.DOCKER_USERNAME }}/my-node-app:${{ github.sha }}
           docker tag my-node-app ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
+          docker images  # List Docker images to verify the build
           docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
 
