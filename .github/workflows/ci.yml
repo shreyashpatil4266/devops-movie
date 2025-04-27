@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-buildx-${{ hashFiles('**/Dockerfile') }}
           restore-keys: |
             ${{ runner.os }}-buildx-
 
@@ -42,6 +42,8 @@ jobs:
       # Push Docker image to Docker Hub (or another registry if you use that)
       - name: Push Docker image
         run: |
+          docker tag my-node-app ${{ secrets.DOCKER_USERNAME }}/my-node-app:${{ github.sha }}
           docker tag my-node-app ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
 
