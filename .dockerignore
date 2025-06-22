@@ -1,0 +1,5 @@
+# Ignore unused videos
+static/videos/movie-*.mp4
+unused video/
+*.mp4
+

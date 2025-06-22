@@ -2,58 +2,21 @@
 <html>
 <head>
     <title>DevOps Movie App</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-            background-color: #f5f5f5;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin: 20px 0;
-        }
-        img {
-            height: 300px;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Select Language</h1>
+    <h1>DevOps Movie App</h1>
+    <h2>English Movie</h2>
+    <video width="600" controls>
+        <source src="/static/videos/English.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-    <!-- Form with buttons for Hindi and English -->
-    <form method="POST" action="/movies">
-        <button name="language" value="english">English</button>
-        <button name="language" value="hindi">Hindi</button>
-    </form>
-
-    <!-- Movie list rendering -->
-    {% if movies %}
-        <h2>Top 3 {{ lang.capitalize() }} Movies</h2>
-        <ul>
-            {% for movie in movies %}
-                <li>
-                    <strong>{{ movie.title }}</strong><br>
-                    {% if movie.poster_path %}
-                        <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="poster">
-                    {% else %}
-                        <p>No poster available</p>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <h2>Hindi Movie</h2>
+    <video width="600" controls>
+        <source src="/static/videos/Hindi.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 </body>
 </html>
+
